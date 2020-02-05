@@ -67,12 +67,15 @@ const server = http.createServer((req, res)=> {
         else if(req.method === 'POST'){
             let buffer = '';
             req.on('data', (chunk)=>{
+                console.log(`Data to ${chunk}`)
                 buffer += chunk;
+
             });
             req.on('end', ()=> {
                 const guest = JSON.parse(buffer)
                 addGuest(guest)
                     .then( g => {
+                      console.log(g)
                         res.write(JSON.stringify(g));
                         res.end();
                     })

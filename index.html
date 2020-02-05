@@ -15,7 +15,7 @@
     const App = () => {
         
         const [ guests, setGuests ] = useState([]);
-        const [ name, setName ] = useState('')
+        const [ homie, setName ] = useState('')
 
         useEffect(()=> {
         axios.get('/api/guests')
@@ -24,7 +24,7 @@
 
         const onSubmit = (ev) => {
             ev.preventDefault();
-            axios.post('/api/guests', { name })
+            axios.post('/api/guests', { homie })
                 .then( response => {
                     setGuests([...guests, response.data])
                     setName('');
@@ -34,7 +34,7 @@
         return(
             <div>
                 <form onSubmit={ onSubmit }>
-                    <input type='text' placeholder='Name' onChange={ ev => setName(ev.target.value) } value={ name }/>
+                    <input type='text' placeholder='Name' onChange={ ev => setName(ev.target.value) } value={ homie }/>
                     <button>Create User</button>
                 </form>
 

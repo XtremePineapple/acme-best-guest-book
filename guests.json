@@ -1,34 +1,14 @@
 [
   {
-    "name": "Lucy",
+    "name": "Luke",
     "id": 1
   },
   {
-    "name": "George",
+    "name": "Horace",
     "id": 2
   },
   {
-    "name": "Thunder",
+    "name": "Phinneas",
     "id": 3
-  },
-  {
-    "name": "Lightning",
-    "id": 4
-  },
-  {
-    "name": "Bob Hope",
-    "id": 5
-  },
-  {
-    "name": "Hugh Grant",
-    "id": 6
-  },
-  {
-    "name": "Waldo",
-    "id": 7
-  },
-  {
-    "name": "Theodore",
-    "id": 8
   }
 ]
