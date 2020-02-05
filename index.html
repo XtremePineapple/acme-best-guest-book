@@ -4,10 +4,10 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://locahost:3000/style.css">
   </head>
   <body>
-    <h1>My React App</h1>
+    <h1>The Acme Guest Book</h1>
     <div id='root'></div>
     <script type='text/babel'>
     const { useEffect, useState } = React;
@@ -15,23 +15,42 @@
     const App = () => {
         
         const [ guests, setGuests ] = useState([]);
+        const [ name, setName ] = useState('')
+
         useEffect(()=> {
         axios.get('/api/guests')
             .then( response => setGuests(response.data))
     }, []);
 
+        const onSubmit = (ev) => {
+            ev.preventDefault();
+            axios.post('/api/guests', {
+                "name": name,
+            })
+                .then( response => setName([...name, response.data]))
+                setName('')
+
+        }
+
         return(
+            <div>
+                <form onSubmit={ onSubmit }>
+                    <input type='text' placeholder='Name' onChange={ ev => setName(ev.target.value) }/>
+                    <button>Create User</button>
+                </form>
+
             <ul>
                 {
                     guests.map( guest => {
                         return(
-                            <li>
+                            <li key={ guest.id }>
                                 { guest.name }
                             </li>
                         )
                     })
                 }
             </ul>
+            </div>
         )
     }
       ReactDOM.render(<App />, document.querySelector('#root'));
