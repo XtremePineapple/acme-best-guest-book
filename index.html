@@ -4,7 +4,7 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
-    <link rel="stylesheet" href="https://locahost:3000/style.css">
+    <link rel="stylesheet" href="https://locahost:3000/style.css"/>
   </head>
   <body>
     <h1>The Acme Guest Book</h1>
@@ -24,18 +24,17 @@
 
         const onSubmit = (ev) => {
             ev.preventDefault();
-            axios.post('/api/guests', {
-                "name": name,
-            })
-                .then( response => setName([...name, response.data]))
-                setName('')
-
+            axios.post('/api/guests', { name })
+                .then( response => {
+                    setGuests([...guests, response.data])
+                    setName('');
+                })
         }
 
         return(
             <div>
                 <form onSubmit={ onSubmit }>
-                    <input type='text' placeholder='Name' onChange={ ev => setName(ev.target.value) }/>
+                    <input type='text' placeholder='Name' onChange={ ev => setName(ev.target.value) } value={ name }/>
                     <button>Create User</button>
                 </form>
 
